@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User
+from models import db, Favorites, Users, Planets, Characters
 #from models import Person
 
 app = Flask(__name__)
@@ -30,14 +30,41 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/user', methods=['GET'])
+# endpoints here...
+
+@app.route('/favorites', methods=['GET'])
+def handle_hello():
+
+    response_body = {
+        "msg": "Hello, this is your GET /favorites response "
+    }
+
+    return jsonify(response_body), 
+
+@app.route('/users', methods=['GET'])
 def handle_hello():
 
     response_body = {
         "msg": "Hello, this is your GET /user response "
     }
 
-    return jsonify(response_body), 200
+    return jsonify(response_body),
+
+@app.route('/planets', methods=['GET'])
+def handle_hello():
+    planets= Planets.query.all()
+
+    response_body = {
+        "msg": "Hello, this is your GET /planets",
+        "data": planets
+    }
+
+    return jsonify(response_body),
+
+  
+
+
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
