@@ -8,8 +8,8 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, Favorites, Users, Planets, Characters
-#from models import Person
+from models import db, Favorite, User, Planet, Character
+
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -32,38 +32,34 @@ def sitemap():
 
 # endpoints here...
 
-@app.route('/favorites', methods=['GET'])
-def handle_hello():
+@app.route('/favorite', methods=['GET'])
+def list_favorite():
 
     response_body = {
-        "msg": "Hello, this is your GET /favorites response "
+        "msg": "Hello, this is your GET /favorite response"
     }
 
-    return jsonify(response_body), 
+    return jsonify(response_body), 200
 
-@app.route('/users', methods=['GET'])
-def handle_hello():
+@app.route('/user', methods=['GET'])
+def list_user():
+    users = User.query.all()
 
     response_body = {
         "msg": "Hello, this is your GET /user response "
     }
 
-    return jsonify(response_body),
+    return jsonify(response_body), 200
 
-@app.route('/planets', methods=['GET'])
-def handle_hello():
-    planets= Planets.query.all()
-
+@app.route('/planet', methods=['GET'])
+def list_planet():
+    planet = Planet.query.all()
     response_body = {
-        "msg": "Hello, this is your GET /planets",
-        "data": planets
+        "msg": "Hello, this is your GET /planet",
+        "data": planet
     }
 
-    return jsonify(response_body),
-
-  
-
-
+    return jsonify(response_body), 200
 
 
 # this only runs if `$ python src/main.py` is executed
