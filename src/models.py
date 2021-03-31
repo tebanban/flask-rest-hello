@@ -30,10 +30,12 @@ class Character(db.Model):
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
-    diameter = db.Column(db.Integer)
-    gravity = db.Column(db.String(30))
-    climate = db.Column(db.String(250))
-    population = db.Column(db.Integer)
+    height = db.Column(db.Integer)
+    mass = db.Column(db.Integer)
+    hair_color = db.Column(db.String(250))
+    skin_color = db.Column(db.String(250))
+    gender = db.Column(db.String(250))
+    
     
 class Planet(db.Model):
     __tablename__ = 'planet'
@@ -53,11 +55,11 @@ class Starship(db.Model):
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
-    height = db.Column(db.Integer)
-    mass = db.Column(db.Integer)
-    hair_color = db.Column(db.String(250))
-    skin_color = db.Column(db.String(250))
-    gender = db.Column(db.String(20))
+    model = db.Column(db.String(250))
+    passengers = db.Column(db.Integer)
+    consumable = db.Column(db.String(250))
+    cargo_capacity = db.Column(db.Integer)
+    hyperdrive_rating = db.Column(db.Integer)
     
 
     def to_dict(self):

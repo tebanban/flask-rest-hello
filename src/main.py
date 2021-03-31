@@ -64,6 +64,53 @@ def list_character():
     }
     return jsonify(response_body), 200
 
+# POST method here...
+@app.route('/addAll', methods=['POST'])
+def list_addAll():
+    body = request.get_json()
+    people = body['character'] 
+    planet = body['planet']
+    vehicles = body['starship']
+
+    for c in character:
+        character1 = Character(
+            name = c["Character Name"],
+            heigth =c["Character heigth"],
+            mass = c["Character mass"],
+            hair_color = c["Character hair color"],
+            skin_color = c["Character skin color"],
+            gender = c["Character Gender"]
+        )
+        db.session.add(character1)
+
+    for p in planet:
+        planet1 = Planet (
+            name = p["Name"],
+            diameter = p["Diameter"],
+            climate = p["Climate"],
+            gravity= p["Gravity"],
+            population = p["Population"]
+
+        )
+        db.session.add(planet1)
+
+    for s in starship:
+        starships1 = Starship (
+            name = s["Vehicle name"],
+            model = s["Model"],
+            passengers = serialize["Passengers"],
+            consumable = s["consumable"],
+            cargo_capacity = s["Cargo capacity"],
+            hyperdrive_rating = s["Hyperdrive rating"]
+
+        )
+        db.session.add(vehicles1)
+
+
+
+
+        db.session.commit()
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
