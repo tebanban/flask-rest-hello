@@ -10,7 +10,7 @@ class Favorite(db.Model):
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
     users_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    name= db.Column (db.String(250))
+    name = db.Column (db.String(250))
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -30,10 +30,10 @@ class Character(db.Model):
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
-    diameter= db.Column(db.Integer)
-    gravity= db.Column(db.String(30))
-    climate= db.Column(db.String(250))
-    population= db.Column(db.Integer)
+    diameter = db.Column(db.Integer)
+    gravity = db.Column(db.String(30))
+    climate = db.Column(db.String(250))
+    population = db.Column(db.Integer)
     
 class Planet(db.Model):
     __tablename__ = 'planet'
@@ -55,8 +55,8 @@ class Starship(db.Model):
     name = db.Column(db.String(250), nullable=False)
     height = db.Column(db.Integer)
     mass = db.Column(db.Integer)
-    hair_color= db.Column(db.String(250))
-    skin_color= db.Column(db.String(250))
+    hair_color = db.Column(db.String(250))
+    skin_color = db.Column(db.String(250))
     gender = db.Column(db.String(20))
     
 

@@ -36,29 +36,32 @@ def sitemap():
 def list_favorite():
 
     response_body = {
-        "msg": "Hello, this is your GET /favorite response"
+        "msg": "Hello, this is your GET /favorite response",
     }
-
     return jsonify(response_body), 200
 
 @app.route('/user', methods=['GET'])
 def list_user():
-    users = User.query.all()
 
     response_body = {
-        "msg": "Hello, this is your GET /user response "
+        "msg": "Hello, this is your GET /user response ",
     }
-
     return jsonify(response_body), 200
 
 @app.route('/planet', methods=['GET'])
 def list_planet():
-    planet = Planet.query.all()
+    
     response_body = {
-        "msg": "Hello, this is your GET /planet",
-        "data": planet
+        "msg": "Hello, this is your GET /planet response",
     }
+    return jsonify(response_body), 200
 
+@app.route('/character', methods=['GET'])
+def list_character():
+    
+    response_body = {
+        "msg": "Hello, this is your GET /character response",
+    }
     return jsonify(response_body), 200
 
 
