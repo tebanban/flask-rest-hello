@@ -9,15 +9,15 @@ class Favorite(db.Model):
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
-    users_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    name = db.Column (db.String(250))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    username = db.Column (db.String(250))
 
 class User(db.Model):
     __tablename__ = 'user'
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250), nullable=False)
+    username = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(250))
     password = db.Column(db.String(10))
     #favorites= db.relationship(Favorites)

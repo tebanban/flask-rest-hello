@@ -10,6 +10,13 @@ from utils import APIException, generate_sitemap
 from admin import setup_admin
 from models import db, Favorite, User, Planet, Character
 
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
+
+
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -19,6 +26,11 @@ MIGRATE = Migrate(app, db)
 db.init_app(app)
 CORS(app)
 setup_admin(app)
+
+#JWT 
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this "super secret" with something else!
+jwt = JWTManager(app)
+
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
@@ -64,6 +76,24 @@ def list_character():
     }
     return jsonify(response_body), 200
 
+#JWT
+# Create a route to authenticate your users and return JWT Token. The
+# create_access_token() function is used to actually generate the JWT.
+@app.route("/token", methods=["POST"])
+def create_token():
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+    # Query your database for username and password
+    user = User.filter.query(username=username, password=password).first()
+    if user is None:
+        # the user was not found on the database
+        return jsonify({"msg": "Bad username or password"}), 401
+    
+    # create a new token with the user id inside
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id })
+
+
 # POST method here...
 @app.route('/addAll', methods=['POST'])
 def list_addAll():
@@ -104,7 +134,7 @@ def list_addAll():
             hyperdrive_rating = s["Hyperdrive rating"]
 
         )
-        db.session.add(vehicles1)
+        db.session.add(starship1)
 
 
 
