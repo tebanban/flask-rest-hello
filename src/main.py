@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, Favorite, User, Planet, Character
+from models import db, Favorite, User, Planet, Character, Starship
 
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -76,6 +76,13 @@ def list_character():
     }
     return jsonify(response_body), 200
 
+@app.route('/starship', methods=['GET'])
+def list_starship():
+    
+    response_body = {
+        "msg": "Hello, this is your GET /starship response",
+    }
+    return jsonify(response_body), 200
 #JWT
 # Create a route to authenticate your users and return JWT Token. The
 # create_access_token() function is used to actually generate the JWT.
